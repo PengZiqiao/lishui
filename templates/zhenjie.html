@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>镇街对比</h1>
+        </div>
+        {% for sheet in ['住宅', '商业', '办公'] %}
+            <h3>{{ sheet }}分镇街供销情况</h3>
+            {% for table in data[sheet] %}
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    {% for each in table[0] %}
+                        <th>{{ each }}</th>
+                    {% endfor %}
+                    </thead>
+                    <tbody>
+                    {% for row in table[1] %}
+                        <tr>
+                            {% for each in row %}
+                                <td>{{ each }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{#    TODO: 检查数据是否正确#}
+{% endblock %}

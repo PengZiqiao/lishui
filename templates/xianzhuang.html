@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>市场运行现状</h1>
+        </div>
+        <h2>商品房供销情况</h2>
+        {% for period in ['当月', '累计'] %}
+            <h3>{{ period }}供销情况</h3>
+            <div class="row">
+                    {% for sheet in ['商品房','住宅','商办'] %}
+                        {% set detail = data[period][sheet] %}
+                        <div class="col-md-4">
+                            <h4>{{ sheet }}</h4>
+
+                            <p>上市{{ detail['上市面积'][0] }}万㎡，
+                                {% if period == '当月' %}
+                                    环比{{ detail['上市面积'][1] }}，
+                                {% endif %}
+                                同比{{ detail['上市面积'][2] }}；
+                            </p>
+
+                            <p>上市{{ detail['上市套数'][0] }}套，
+                                {% if period == '当月' %}
+                                    环比{{ detail['上市套数'][1] }}，
+                                {% endif %}
+                                同比{{ detail['上市套数'][2] }}；
+                            </p>
+
+                            <p>销售{{ detail['已售面积'][0] }}万㎡，
+                                {% if period == '当月' %}
+                                    环比{{ detail['已售面积'][1] }}，
+                                {% endif %}
+                                同比{{ detail['已售面积'][2] }}；
+                            </p>
+
+                            <p>销售{{ detail['已售套数'][0] }}套，
+                                {% if period == '当月' %}
+                                    环比{{ detail['已售套数'][1] }}，
+                                {% endif %}
+                                同比{{ detail['已售套数'][2] }}；
+                            </p>
+
+                            <p>金额{{ detail['已售金额'][0] }}亿，
+                                {% if period == '当月' %}
+                                    环比{{ detail['已售金额'][1] }}，
+                                {% endif %}
+                                同比{{ detail['已售金额'][2] }}；
+                            </p>
+
+                            <p>均价{{ detail['已售均价'][0] }}元/㎡，
+                                {% if period == '当月' %}
+                                    环比{{ detail['已售均价'][1] }}，
+                                {% endif %}
+                                同比{{ detail['已售均价'][2] }}；
+                            </p>
+                        </div>
+                    {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
